@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
@@ -23,7 +24,7 @@
       color: #777;
       margin-top: 1rem;
       letter-spacing: 1px;
-      line-height: 1.4;
+      line-height: 1.4; /* نارمل لائن اسپیس */
     }
     .ltr {
       direction: ltr;
@@ -66,8 +67,8 @@
 
     <!-- نیچے کریڈٹ -->
     <div class="credit-bottom">
-      <div class="ltr">Developed by:</div><br/>
-      <div class="ltr credit-name">Sheikh Danish Taimoor</div><br/>
+      <div class="ltr">Developed by:</div>
+      <div class="ltr credit-name">Sheikh Danish Taimoor</div>
       <div class="ltr">With AI Assistance</div>
     </div>
   </div>
@@ -108,7 +109,7 @@
     }
 
     nameInput.addEventListener('input', () => {
-      const val = nameInput.value; // کوئی trim نہیں، اسپیس نارمل رہے گی
+      const val = nameInput.value; // اسپیس نارمل
       calculateAbjad(val);
     });
   </script>
