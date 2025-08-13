@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ابجد کیلکولیٹر</title>
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- جمیل نوری نستعلیق فونٹ -->
@@ -27,7 +28,6 @@
     .ltr {
       direction: ltr;
       unicode-bidi: isolate;
-      display: inline-block;
     }
     .credit-name {
       color: #10b981;
@@ -36,7 +36,7 @@
   </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
-  <div id="calculator" class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+  <div class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
 
     <h1 class="text-3xl font-bold text-emerald-700 mb-4 text-center">ابجد کیلکولیٹر</h1>
 
@@ -108,8 +108,7 @@
     }
 
     nameInput.addEventListener('input', () => {
-      const val = nameInput.value.trim(); // سپیس برقرار، صرف شروع/آخر سے کاٹ
-      nameInput.value = val;
+      const val = nameInput.value; // کوئی trim نہیں، اسپیس نارمل رہے گی
       calculateAbjad(val);
     });
   </script>
