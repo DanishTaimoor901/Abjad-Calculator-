@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ابجد کیلکولیٹر</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- جمیل نوری نستعلیق فونٹ -->
+  <link href="https://fonts.cdnfonts.com/css/jameel-noori-nastaleeq" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Jameel Noori Nastaleeq', serif;
+      background-color: #f0f4f8;
+    }
+    .credit-bottom {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 1rem;
+      letter-spacing: 1px;
+      line-height: 1.4;
+    }
+    .ltr {
+      direction: ltr;
+      unicode-bidi: isolate;
+      display: inline-block;
+    }
+    .credit-name {
+      color: #10b981;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+  <div id="calculator" class="bg-white p-6 rounded-lg shadow-xl max-w-md w-full">
+
+    <h1 class="text-3xl font-bold text-emerald-700 mb-4 text-center">ابجد کیلکولیٹر</h1>
+
+    <input
+      type="text"
+      id="nameInput"
+      class="w-full p-3 border rounded-lg text-xl text-right focus:outline-none focus:ring-2 focus:ring-emerald-400"
+      placeholder="یہاں ٹائپ کریں" />
+
+    <div class="mt-6">
+      <h2 class="text-xl font-bold text-emerald-600">
+        کل اعداد: <span id="totalValue">0</span>
+      </h2>
+    </div>
+
+    <div class="mt-4 overflow-x-auto">
+      <table class="min-w-full text-center border">
+        <thead class="bg-emerald-100">
+          <tr>
+            <th class="px-4 py-2 border">حرف</th>
+            <th class="px-4 py-2 border">عدد</th>
+          </tr>
+        </thead>
+        <tbody id="detailsTable" class="text-lg"></tbody>
+      </table>
+    </div>
+
+    <!-- نیچے کریڈٹ -->
+    <div class="credit-bottom">
+      <div class="ltr">Developed by:</div><br/>
+      <div class="ltr credit-name">Sheikh Danish Taimoor</div><br/>
+      <div class="ltr">With AI Assistance</div>
+    </div>
+  </div>
+
+  <script>
+    const abjadMapping = {
+      'ا': 1, 'ب': 2, 'پ': 2, 'ت': 400, 'ٹ': 400,
+      'ث': 500, 'ج': 3, 'چ': 3, 'ح': 8, 'خ': 600,
+      'د': 4, 'ڈ': 4, 'ذ': 700, 'ر': 200, 'ڑ': 200,
+      'ز': 7, 'ژ': 7, 'س': 60, 'ش': 300, 'ص': 90,
+      'ض': 100, 'ط': 9, 'ظ': 900, 'ع': 70, 'غ': 1000,
+      'ف': 80, 'ق': 100, 'ک': 20, 'گ': 20, 'ل': 30,
+      'م': 40, 'ن': 50, 'ں': 50, 'و': 6, 'ہ': 5,
+      'ھ': 5, 'ی': 10, 'ے': 10
+    };
+
+    const nameInput = document.getElementById('nameInput');
+    const totalValue = document.getElementById('totalValue');
+    const detailsTable = document.getElementById('detailsTable');
+
+    function calculateAbjad(text) {
+      let total = 0;
+      const rows = text
+        .split('')
+        .filter(ch => abjadMapping[ch])
+        .map(ch => {
+          total += abjadMapping[ch];
+          return `<tr>
+                    <td class="border px-4 py-2">${ch}</td>
+                    <td class="border px-4 py-2">${abjadMapping[ch]}</td>
+                  </tr>`;
+        });
+
+      totalValue.textContent = total;
+      detailsTable.innerHTML = rows.length
+        ? rows.join('')
+        : `<tr><td colspan="2" class="border px-4 py-2 text-gray-500">کوئی درست حرف نہیں</td></tr>`;
+    }
+
+    nameInput.addEventListener('input', () => {
+      const val = nameInput.value.trim(); // سپیس برقرار، صرف شروع/آخر سے کاٹ
+      nameInput.value = val;
+      calculateAbjad(val);
+    });
+  </script>
+</body>
+</html>
