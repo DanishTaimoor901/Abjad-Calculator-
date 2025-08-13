@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
@@ -22,9 +21,8 @@
       font-family: Arial, sans-serif;
       font-size: 0.9rem;
       color: #777;
-      margin-top: 1rem;
+      line-height: 1.4;
       letter-spacing: 1px;
-      line-height: 1.4; /* نارمل لائن اسپیس */
     }
     .ltr {
       direction: ltr;
@@ -66,15 +64,17 @@
     </div>
 
     <!-- نیچے کریڈٹ -->
-    <div class="credit-bottom">
-      <div class="ltr">Developed by:</div>
-      <div class="ltr credit-name">Sheikh Danish Taimoor</div>
-      <div class="ltr">With AI Assistance</div>
+    <div class="credit-bottom mt-4">
+      <span class="ltr">Developed by:</span><br>
+      <span class="ltr credit-name">Sheikh Danish Taimoor</span><br>
+      <span class="ltr">With AI Assistance</span>
     </div>
   </div>
 
   <script>
+    // اردو + عربی حروف اور ان کی ابجد قدریں
     const abjadMapping = {
+      // اردو حروف
       'ا': 1, 'ب': 2, 'پ': 2, 'ت': 400, 'ٹ': 400,
       'ث': 500, 'ج': 3, 'چ': 3, 'ح': 8, 'خ': 600,
       'د': 4, 'ڈ': 4, 'ذ': 700, 'ر': 200, 'ڑ': 200,
@@ -82,8 +82,21 @@
       'ض': 100, 'ط': 9, 'ظ': 900, 'ع': 70, 'غ': 1000,
       'ف': 80, 'ق': 100, 'ک': 20, 'گ': 20, 'ل': 30,
       'م': 40, 'ن': 50, 'ں': 50, 'و': 6, 'ہ': 5,
-      'ھ': 5, 'ی': 10, 'ے': 10
+      'ھ': 5, 'ی': 10, 'ے': 10,
+
+      // عربی حروف
+      'ء': 1, 'أ': 1, 'إ': 1, 'آ': 1, 'ب': 2, 'ت': 400, 'ث': 500,
+      'ج': 3, 'ح': 8, 'خ': 600, 'د': 4, 'ذ': 700, 'ر': 200,
+      'ز': 7, 'س': 60, 'ش': 300, 'ص': 90, 'ض': 100, 'ط': 9,
+      'ظ': 900, 'ع': 70, 'غ': 1000, 'ف': 80, 'ق': 100, 'ك': 20,
+      'ل': 30, 'م': 40, 'ن': 50, 'و': 6, 'ه': 5, 'ي': 10
     };
+
+    // اعراب کو شمار سے خارج کرنے کے لیے فنکشن
+    function isDiacritic(char) {
+      const code = char.charCodeAt(0);
+      return code >= 0x064B && code <= 0x065F;
+    }
 
     const nameInput = document.getElementById('nameInput');
     const totalValue = document.getElementById('totalValue');
@@ -93,7 +106,7 @@
       let total = 0;
       const rows = text
         .split('')
-        .filter(ch => abjadMapping[ch])
+        .filter(ch => abjadMapping[ch]) // صرف Mapping والے حروف شمار ہوں
         .map(ch => {
           total += abjadMapping[ch];
           return `<tr>
@@ -109,9 +122,11 @@
     }
 
     nameInput.addEventListener('input', () => {
-      const val = nameInput.value; // اسپیس نارمل
+      const val = nameInput.value;
       calculateAbjad(val);
     });
   </script>
+</body>
+</html>
 </body>
 </html>
